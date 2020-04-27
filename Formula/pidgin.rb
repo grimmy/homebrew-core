@@ -54,6 +54,9 @@ class Pidgin < Formula
 
     ENV["ac_cv_func_perl_run"] = "yes" if MacOS.version == :high_sierra
 
+    # patch pidgin to read plugins and allow them to live in separate formulae which can
+    # all install their symlinks into these directories. See:
+    #   https://github.com/Homebrew/homebrew-core/pull/53557
     inreplace "finch/finch.c", "LIBDIR", "\"#{HOMEBREW_PREFIX}/lib/purple-2\""
     inreplace "libpurple/plugin.c", "LIBDIR", "\"#{HOMEBREW_PREFIX}/lib/purple-2\""
     inreplace "pidgin/gtkmain.c", "LIBDIR", "\"#{HOMEBREW_PREFIX}/lib/purple-2\""
